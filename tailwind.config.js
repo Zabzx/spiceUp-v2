@@ -12,6 +12,9 @@ module.exports = {
       spacing: {
         "100": "100px",
         "111": "1920px"
+      },
+      fontFamily: {
+        'dancing-script': ['Dancing Script']
       }
     },
     container: {

@@ -10,7 +10,7 @@ const Header = () => {
         <h1 className="flex justify-center flex-1 text-red-500 text-4xl">spiceUp!</h1>
 
         <div className="flex flex-1 justify-end">
-        <input placeholder='Search for a meal' type="text" className="w-3/5 p-1 border-2 rounded-md border-gray-400 focus:outline-none" />
+        <input placeholder='Search for a meal' type="text" className="w-3/5 p-1 border-2 rounded-xl border-gray-400 focus:outline-none" />
         </div>
     </nav>
   )
