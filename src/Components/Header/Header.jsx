@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react'
-import { Link, link } from 'react-router-dom'
+import React, { useState, useRef, useContext } from 'react'
+import { Link, link, useNavigate } from 'react-router-dom'
+import { ResultContext } from '../../context/ResultContext';
 
 const Header = () => {
 
@@ -8,7 +9,12 @@ const Header = () => {
   const [dishResults, setDishResults] = useState([]);
 
   // Refs
-  let dishRef = useRef()
+  let dishRef = useRef();
+
+  // Context
+  const [results, setResults] = useContext(ResultContext)
+
+  let navigate = useNavigate();
 
   // Functions
   async function dishSearch(e) {
@@ -17,9 +23,11 @@ const Header = () => {
     .then(res => res.json())
     .then(res => {
       dishRef = res.meals;
-      console.log(dishRef)
+      setResults(dishRef)
+      navigate('/results')
     })
-  }
+  };
+
   return (
     <nav className="h-28 flex justify-between items-center container mx-auto">
         <div className="flex-1">
