@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, link } from 'react-router-dom'
 
 const Header = () => {
@@ -7,14 +7,17 @@ const Header = () => {
   const [userSearchValue, setUserSearchValue] = useState('');
   const [dishResults, setDishResults] = useState([]);
 
+  // Refs
+  let dishRef = useRef()
+
   // Functions
   async function dishSearch(e) {
     e.preventDefault();
     await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${userSearchValue}`)
     .then(res => res.json())
     .then(res => {
-      setDishResults((prev) => prev + res.meals)
-      console.log(dishResults)
+      dishRef = res.meals;
+      console.log(dishRef)
     })
   }
   return (
