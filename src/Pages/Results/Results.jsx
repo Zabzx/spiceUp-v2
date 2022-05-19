@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Header from '../../Components/Header/Header';
 import Modal from '../../Components/Modal/Modal';
 import PlaceHolderImage from '../../assets/hero.jpg';
@@ -8,6 +8,7 @@ const Results = () => {
 
     // State
     const [modal, setModal] = useState(false);
+    const [dishSelected, setDishSelected] = useState(false)
     const [selectedDish, setSelectedDish] = useState();
 
     // Context
@@ -15,7 +16,8 @@ const Results = () => {
 
     // Functions
     const openModal = (dish) => {
-         setSelectedDish(dish)
+        setDishSelected(true)
+        setSelectedDish(dish)
         setModal(!modal);
         console.log(selectedDish)
     }
@@ -23,7 +25,9 @@ const Results = () => {
   return (
     <>
     <Header/>
-    <Modal dish={selectedDish} state={modal}/>
+    <div className={ dishSelected ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
+        <h1 className="">{dishSelected ? selectedDish.strMeal : 'placeholder'}</h1>
+    </div>
     <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full bg-gray-300">
         {results.map((dish) => (
             <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center" key={dish.idMeal} onClick={() => openModal(dish)}>
