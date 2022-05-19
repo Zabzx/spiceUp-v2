@@ -3,7 +3,8 @@ module.exports = {
     "./src/App.js",
     "./src/Components/Header/Header.jsx",
     "./src/Pages/Home/Home.jsx",
-    "./src/Pages/Results/Results.jsx"
+    "./src/Pages/Results/Results.jsx",
+    "./src/Components/Modal/Modal.jsx"
   ],
   theme: {
     extend: {
