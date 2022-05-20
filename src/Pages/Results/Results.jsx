@@ -1,7 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../../Components/Header/Header';
-import Modal from '../../Components/Modal/Modal';
-import PlaceHolderImage from '../../assets/hero.jpg';
 import { ResultContext } from '../../context/ResultContext';
 import { ImCross } from 'react-icons/im'
 
@@ -9,7 +7,6 @@ const Results = () => {
 
     // State
     const [mountModal, setMoundModal] = useState(false);
-    const [modal, setModal] = useState(false);
     const [dishSelected, setDishSelected] = useState(false)
     const [selectedDish, setSelectedDish] = useState();
 
@@ -17,15 +14,22 @@ const Results = () => {
     const [results, setResults] = useContext(ResultContext);
 
     // Functions
+    // Initially chosing a dish to be displayed when a user hovers over a result item.
     const chooseDish = (dish) => {
-        setSelectedDish(dish)
-        setMoundModal(true);
+        if (dishSelected) {
+            return
+        } else {
+            setSelectedDish(dish);
+            setMoundModal(true)
+        }
     }
 
-    const openModal = (dish) => {
+    // Opens the modal
+    const openModal = () => {
         setDishSelected(true)
     }
 
+    // Closes the modal
     const closeModal = () => {
         setDishSelected(false);
     }
@@ -41,11 +45,11 @@ const Results = () => {
         </div>
         <div className="container h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
-        <h1 className="text-3xl text-red-600 py-10">Instructions:</h1>
+        <h1 className="text-3xl text-red-500 py-10">Instructions:</h1>
         <p className="pt-4">{selectedDish.strInstructions}</p>
 
         {/* Ingredients */}
-        <h1 className="text-red-600 text-3xl mt-20 mb-10">Ingredients:</h1>
+        <h1 className="text-red-500 text-3xl mt-20 mb-10">Ingredients:</h1>
         <ul className="list-disc">
         <li>{selectedDish.strIngredient1 + " " + selectedDish.strMeasure1}</li>
         <li>{selectedDish.strIngredient2 + " " + selectedDish.strMeasure2}</li>
@@ -67,14 +71,14 @@ const Results = () => {
 
         <div className="my-10">
         <h1 className="text-3xl text-red-500">YouTube Link</h1>
-        <a href={selectedDish.strYoutube} target="_blank"><p className='text-red-500'>{selectedDish.strYoutube}</p></a>
+        <a href={selectedDish.strYoutube} target="_blank"><p className='text-red-500 pb-10'>{selectedDish.strYoutube}</p></a>
         </div>
         </div>
     </div> : ''}
     {/* Grid */}
     <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full bg-gray-300">
         {results.map((dish) => (
-            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
+            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>
