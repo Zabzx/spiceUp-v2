@@ -8,7 +8,7 @@ import { ImCross } from 'react-icons/im'
 const Results = () => {
 
     // State
-    const [mountModal, setMountModal] = useState(false);
+    const [mountModal, setMoundModal] = useState(false);
     const [modal, setModal] = useState(false);
     const [dishSelected, setDishSelected] = useState(false)
     const [selectedDish, setSelectedDish] = useState();
@@ -17,25 +17,27 @@ const Results = () => {
     const [results, setResults] = useContext(ResultContext);
 
     // Functions
+    const chooseDish = (dish) => {
+        setSelectedDish(dish)
+        setMoundModal(true);
+    }
+
     const openModal = (dish) => {
         setDishSelected(true)
-        setSelectedDish(dish)
-        setModal(!modal);
-        console.log(selectedDish)
     }
 
     const closeModal = () => {
-        setModal(false);
+        setDishSelected(false);
     }
 
   return (
     <>
     <Header/>
     {/* Modal */}
-    { modal ? <div className={ dishSelected ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
+    { mountModal ? <div className={ dishSelected ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
         <div className="flex justify-between container h-20 items-center">
         <h1 className="flex-1 text-3xl text-red-500">{dishSelected ? selectedDish.strMeal : 'placeholder'}</h1>
-        <ImCross onClick={closeModal}/>
+        <ImCross className="cursor-pointer p-1 text-3xl" onClick={closeModal}/>
         </div>
         <div className="container h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
@@ -72,7 +74,7 @@ const Results = () => {
     {/* Grid */}
     <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full bg-gray-300">
         {results.map((dish) => (
-            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center" key={dish.idMeal} onClick={() => openModal(dish)}>
+            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>
