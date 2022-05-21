@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react'
 import { Link, link, useNavigate } from 'react-router-dom'
 import { ResultContext } from '../../context/ResultContext';
+import { SearchedForContext } from '../../context/SearchedFor';
 
 const Header = () => {
 
@@ -12,13 +13,15 @@ const Header = () => {
   let dishRef = useRef();
 
   // Context
-  const [results, setResults] = useContext(ResultContext)
+  const [results, setResults] = useContext(ResultContext);
+  const [searchedFor, setSearchedFor] = useContext(SearchedForContext);
 
   let navigate = useNavigate();
 
   // Functions
   async function dishSearch(e) {
     e.preventDefault();
+    setSearchedFor(userSearchValue);
     await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${userSearchValue}`)
     .then(res => res.json())
     .then(res => {

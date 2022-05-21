@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Header from '../../Components/Header/Header';
 import { ResultContext } from '../../context/ResultContext';
+import { SearchedForContext } from '../../context/SearchedFor';
 import { ImCross } from 'react-icons/im'
 
 const Results = () => {
@@ -12,6 +13,7 @@ const Results = () => {
 
     // Context
     const [results, setResults] = useContext(ResultContext);
+    const [searchedFor, setSearchedFor] = useContext(SearchedForContext);
 
     // Functions
     // Initially chosing a dish to be displayed when a user hovers over a result item.
@@ -76,6 +78,8 @@ const Results = () => {
         </div>
     </div> : ''}
     {/* Grid */}
+
+    <h1 className="text-3xl font-dancing-script">Results for {searchedFor}</h1>
     <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full bg-gray-300">
         {results.map((dish) => (
             <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
