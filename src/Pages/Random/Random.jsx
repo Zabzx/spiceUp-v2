@@ -1,28 +1,26 @@
 import React, { useContext, useState } from 'react'
-import Header from '../../Components/Header/Header';
-import { ResultContext } from '../../context/ResultContext';
-import { SearchedForContext } from '../../context/SearchedFor';
+import Header from '../../Components/Header/Header'
+import { RandomContext } from '../../context/RandomContex';
 import { ImCross } from 'react-icons/im'
 
-const Results = () => {
+const Random = () => {
 
     // State
     const [mountModal, setMountModal] = useState(false);
-    const [dishSelected, setDishSelected] = useState(false)
+    const [dishSelected, setDishSelected] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
 
-    // Context
-    const [results, setResults] = useContext(ResultContext);
-    const [searchedFor, setSearchedFor] = useContext(SearchedForContext);
+  // Context
+  const [randomDish, setRandomDish] = useContext(RandomContext);
 
-    // Functions
-    // Initially chosing a dish to be displayed when a user hovers over a result item.
-    const chooseDish = (dish) => {
+  // Functions
+      // Initially chosing a dish to be displayed when a user hovers over a result item.
+      const chooseDish = () => {
         if (dishSelected) {
             return
         } else {
-            setSelectedDish(dish);
-            console.log(selectedDish)
+            setSelectedDish(randomDish);
+            console.log(randomDish)
             setMountModal(true)
         }
     }
@@ -39,8 +37,9 @@ const Results = () => {
 
   return (
     <>
-    <Header/>
-    {/* Modal */}
+      <Header/>
+
+          {/* Modal */}
     { mountModal ? <div className={ dishSelected ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
         <div className="flex justify-between container h-20 items-center">
         <h1 className="flex-1 text-3xl text-red-500">{dishSelected ? selectedDish.strMeal : 'placeholder'}</h1>
@@ -78,28 +77,21 @@ const Results = () => {
         </div>
         </div>
     </div> : ''}
-    {/* Grid */}
-
-    <h1 className="text-3xl text-center pt-5 font-dancing-script">Results for {searchedFor}</h1>
-
-    <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
-        {results.map((dish) => (
-            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
+      
+      <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
                 <div className="dish-img">
-                <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
+                <img className="w-full object-cover rounded-t-lg" src={randomDish.strMealThumb} alt="" />
                 </div>
 
                 <div className="dish-info">
-                <h1 className='text-white text-center text-4xl pt-3 font-dancing-script'>{dish.strMeal}</h1>
-                <p className="px-6 mt-5 text-white text-lg">Region: {dish.strArea}</p>
-                <p className="px-6 text-white category text-lg">Category: {dish.strCategory}</p>
-                <p className="tags px-6 pb-5 text-white text-lg">Tags: {dish.strTags}</p>
+                <h1 className='text-white text-center text-4xl pt-3 font-dancing-script'>{randomDish.strMeal}</h1>
+                <p className="px-6 mt-5 text-white text-lg">Region: {randomDish.strArea}</p>
+                <p className="px-6 text-white category text-lg">Category: {randomDish.strCategory}</p>
+                <p className="tags px-6 pb-5 text-white text-lg">Tags: {randomDish.strTags}</p>
                 </div>
             </div>
-        ))}
-    </div>
     </>
   )
 }
 
-export default Results
+export default Random
