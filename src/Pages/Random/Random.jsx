@@ -35,6 +35,15 @@ const Random = () => {
         setDishSelected(false);
     }
 
+    // New random dish
+    async function getRandomDish() {
+      await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+      .then(res => res.json())
+      .then(res => {
+        setRandomDish(res.meals[0]);
+      })
+    }
+
   return (
     <>
       <Header/>
@@ -91,7 +100,7 @@ const Random = () => {
                 </div>
             </div>
 
-            <button className="try-again-btn absolute right-52 bg-red-500 p-3 rounded-lg text-white">Try Again</button>
+            <button className="try-again-btn absolute right-52 bg-red-500 p-3 rounded-lg text-white" onClick={getRandomDish}>Try Again</button>
     </>
   )
 }
