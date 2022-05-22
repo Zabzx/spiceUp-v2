@@ -4,7 +4,8 @@ module.exports = {
     "./src/Components/Header/Header.jsx",
     "./src/Pages/Home/Home.jsx",
     "./src/Pages/Results/Results.jsx",
-    "./src/Components/Modal/Modal.jsx"
+    "./src/Components/Modal/Modal.jsx",
+    "./src/Pages/Random/Random.jsx"
   ],
   theme: {
     extend: {

@@ -78,7 +78,7 @@ const Random = () => {
         </div>
     </div> : ''}
       
-      <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
+      <div className="bg-red-500 w-1/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={randomDish.strMealThumb} alt="" />
                 </div>
@@ -90,6 +90,8 @@ const Random = () => {
                 <p className="tags px-6 pb-5 text-white text-lg">Tags: {randomDish.strTags}</p>
                 </div>
             </div>
+
+            <button className="try-again-btn absolute right-52 bg-red-500 p-3 rounded-lg text-white">Try Again</button>
     </>
   )
 }
