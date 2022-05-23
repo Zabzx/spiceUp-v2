@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from 'react'
-import { Link, link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ResultContext } from '../../context/ResultContext';
 import { SearchedForContext } from '../../context/SearchedFor';
 
@@ -37,7 +37,9 @@ const Header = () => {
         <button className="favorites-btn bg-red-500 py-2 px-2 rounded-md text-white text-xl" >Favorites</button>
         </div>
 
+        <Link to={'/'}>
         <h1 className="flex justify-center flex-1 text-red-500 text-4xl">spiceUp!</h1>
+        </Link>
 
         <form className="flex flex-1 justify-end" onSubmit={(e) => dishSearch(e)}>
         <input placeholder='Search for a meal' type="text" className="w-3/5 p-1 border-2 rounded-xl border-gray-400 focus:outline-none" onChange={(e) => setUserSearchValue(e.target.value)} />
