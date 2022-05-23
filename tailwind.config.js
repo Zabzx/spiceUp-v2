@@ -5,7 +5,8 @@ module.exports = {
     "./src/Pages/Home/Home.jsx",
     "./src/Pages/Results/Results.jsx",
     "./src/Components/Modal/Modal.jsx",
-    "./src/Pages/Random/Random.jsx"
+    "./src/Pages/Random/Random.jsx",
+    "./src/Pages/Search-Error/SearchError.jsx"
   ],
   theme: {
     extend: {

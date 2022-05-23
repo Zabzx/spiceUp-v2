@@ -25,9 +25,15 @@ const Header = () => {
     await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${userSearchValue}`)
     .then(res => res.json())
     .then(res => {
-      dishRef = res.meals;
+      
+      if (res.meals == null) {
+        console.log('error')
+        navigate('/search-error')
+      } else {
+        dishRef = res.meals;
       setResults(dishRef)
       navigate('/results')
+      }
     })
   };
 
