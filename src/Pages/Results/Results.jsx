@@ -22,7 +22,6 @@ const Results = () => {
             return
         } else {
             setSelectedDish(dish);
-            console.log(selectedDish)
             setMountModal(true)
         }
     }

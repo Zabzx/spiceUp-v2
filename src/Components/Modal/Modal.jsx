@@ -2,7 +2,22 @@ import React from 'react'
 import { ImCross } from 'react-icons/im'
 
 const Modal = ({selectedDish, state, closeModal}) => {
+
+  const objecto = {
+    id: 1,
+    muhfigin: 'lol',
+    bro: '!!!'
+  }
+
+  const local = (dish) => {
+    console.log(dish)
+    localStorage.setItem('hehe', JSON.stringify(objecto))
+    let newObjecto = localStorage.getItem('hehe')
+    console.log(JSON.parse(newObjecto))
+  }
+
   return (
+
     <div className={ state ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
         <div className="flex justify-between container h-20 items-center">
         <h1 className="flex-1 text-3xl text-red-500">{selectedDish.strMeal}</h1>
@@ -10,6 +25,8 @@ const Modal = ({selectedDish, state, closeModal}) => {
         </div>
         <div className="container h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
+
+        <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => local(selectedDish)}>Add to Favorites</button>
         <h1 className="text-3xl text-red-500 py-10">Instructions:</h1>
         <p className="pt-4">{selectedDish.strInstructions}</p>
 
