@@ -1,11 +1,12 @@
 import { parse } from 'postcss'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { CurrentFavoriteContext } from '../../context/CurrentFavorite'
 import { ImCross } from 'react-icons/im'
 
 const Modal = ({selectedDish, state, closeModal}) => {
 
-  // State
-  const [currentFavoriteDishes, setCurrentFavoriteDishes] = useState([])
+  // Context
+  const [currentFavoriteDishes, setCurrentFavoriteDishes] = useContext(CurrentFavoriteContext)
 
   useEffect(() => {
     console.log(currentFavoriteDishes)

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import Header from '../../Components/Header/Header.jsx';
 
 const Favorites = () => {
 
@@ -30,9 +31,11 @@ const Favorites = () => {
     }, [])
 
   return (
+    <>
+    <Header/>
     <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
         {favoriteDishes.map((dish) => (
-            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
+            <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>
@@ -46,6 +49,7 @@ const Favorites = () => {
             </div>
         ))}
     </div>
+    </>
   )
 }
 
