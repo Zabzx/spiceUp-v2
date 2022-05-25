@@ -9,6 +9,7 @@ import { ResultContextProvider } from './context/ResultContext';
 import { SearchedForContextProvider } from './context/SearchedFor';
 import { RandomContextProvider } from './context/RandomContex';
 import SearchError from './Pages/Search-Error/SearchError';
+import Favorites from './Pages/Favorites/Favorites';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,7 @@ root.render(
     <Route path='/results' element={<Results/>}/>
     <Route path='/random' element={<Random/>}/>
     <Route path='/search-error' element={<SearchError/>}/>
+    <Route path='/favorites' element={<Favorites/>}/>
     </Routes>
     </BrowserRouter>
     </RandomContextProvider>
