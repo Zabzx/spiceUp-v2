@@ -21,7 +21,6 @@ const Random = () => {
             return
         } else {
             setSelectedDish(randomDish);
-            console.log(randomDish)
             setMountModal(true)
         }
     }

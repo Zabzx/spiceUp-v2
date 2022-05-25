@@ -1,19 +1,23 @@
-import React from 'react'
+import { parse } from 'postcss'
+import React, { useEffect, useState } from 'react'
 import { ImCross } from 'react-icons/im'
 
 const Modal = ({selectedDish, state, closeModal}) => {
 
-  const objecto = {
-    id: 1,
-    muhfigin: 'lol',
-    bro: '!!!'
-  }
+  // State
+  const [currentFavoriteDishes, setCurrentFavoriteDishes] = useState([])
 
+  useEffect(() => {
+    console.log(currentFavoriteDishes)
+    localStorage.setItem('favoriteDishes', JSON.stringify(currentFavoriteDishes));
+    console.log(JSON.parse(localStorage.getItem('favoriteDishes')))
+  }, [currentFavoriteDishes])
+
+  //use getItem for existing storage then append to it
   const local = (dish) => {
-    console.log(dish)
-    localStorage.setItem('hehe', JSON.stringify(objecto))
-    let newObjecto = localStorage.getItem('hehe')
-    console.log(JSON.parse(newObjecto))
+    let favoriteDishesArray = [];
+    favoriteDishesArray.push(dish);
+    setCurrentFavoriteDishes([...currentFavoriteDishes, dish])
   }
 
   return (
