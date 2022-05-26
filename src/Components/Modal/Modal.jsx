@@ -15,7 +15,11 @@ const Modal = ({selectedDish, state, closeModal}) => {
   // Functions
 
   useEffect(() => {
-    setFavoriteDishes(favoritesContext)
+    if (favoritesContext === undefined) {
+      return 
+    } else {
+      setFavoriteDishes(favoritesContext)
+    }
   }, [])
 
   useEffect(() => {

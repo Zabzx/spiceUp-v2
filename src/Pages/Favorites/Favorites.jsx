@@ -40,7 +40,7 @@ const Favorites = () => {
     <>
     <Header/>
     { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal}/> : ''}
-    <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
+   { favoriteDishes ? <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
         {favoriteDishes.map((dish) => (
             <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">
@@ -55,7 +55,7 @@ const Favorites = () => {
                 </div>
             </div>
         ))}
-    </div>
+    </div> : <h1 className="text-center mt-10 text-3xl">No favorites yet</h1>}
     </>
   )
 }
