@@ -1,24 +1,26 @@
 import { parse } from 'postcss'
-import React, { useEffect, useState, useContext } from 'react'
-import { CurrentFavoriteContext } from '../../context/CurrentFavorite'
+import React, { useEffect, useRef, useState } from 'react'
 import { ImCross } from 'react-icons/im'
 
 const Modal = ({selectedDish, state, closeModal}) => {
 
-  // Context
-  const [currentFavoriteDishes, setCurrentFavoriteDishes] = useContext(CurrentFavoriteContext)
+  // State
+  const [favoriteDishes, setFavoriteDishes] = useState([]);
+
+  // Functions
 
   useEffect(() => {
-    console.log(currentFavoriteDishes)
-    localStorage.setItem('favoriteDishes', JSON.stringify(currentFavoriteDishes));
-    console.log(JSON.parse(localStorage.getItem('favoriteDishes')))
-  }, [currentFavoriteDishes])
+    if (localStorage.getItem('favoriteDishes') === null) {
+      localStorage.setItem('favoriteDishes', favoriteDishes)
+      console.log(favoriteDishes)
+    } else if (localStorage.getItem('favoriteDishes') === '') {
+      localStorage.setItem('favoriteDishes', JSON.stringify(favoriteDishes))
+      console.log(localStorage)
+    }
+  }, [favoriteDishes])
 
-  //use getItem for existing storage then append to it
-  const local = (dish) => {
-    let favoriteDishesArray = [];
-    favoriteDishesArray.push(dish);
-    setCurrentFavoriteDishes([...currentFavoriteDishes, dish])
+  const addToFavorites = (dish) => {
+    setFavoriteDishes([dish, ...favoriteDishes])
   }
 
   return (
@@ -31,7 +33,7 @@ const Modal = ({selectedDish, state, closeModal}) => {
         <div className="container h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
 
-        <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => local(selectedDish)}>Add to Favorites</button>
+        <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => addToFavorites(selectedDish)}>Add to Favorites</button>
         <h1 className="text-3xl text-red-500 py-10">Instructions:</h1>
         <p className="pt-4">{selectedDish.strInstructions}</p>
 

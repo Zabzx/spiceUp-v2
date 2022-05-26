@@ -10,15 +10,12 @@ import { SearchedForContextProvider } from './context/SearchedFor';
 import { RandomContextProvider } from './context/RandomContex';
 import SearchError from './Pages/Search-Error/SearchError';
 import Favorites from './Pages/Favorites/Favorites';
-import { CurrentFavoriteContextProvider } from './context/CurrentFavorite';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <ResultContextProvider>
     <SearchedForContextProvider>
     <RandomContextProvider>
-    <CurrentFavoriteContextProvider>
     <BrowserRouter>
     <Routes>
     <Route path='/' element={<App />}/>
@@ -28,9 +25,7 @@ root.render(
     <Route path='/favorites' element={<Favorites/>}/>
     </Routes>
     </BrowserRouter>
-    </CurrentFavoriteContextProvider>
     </RandomContextProvider>
     </SearchedForContextProvider>
     </ResultContextProvider>
-  </React.StrictMode>
 );
