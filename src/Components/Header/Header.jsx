@@ -37,12 +37,14 @@ const Header = () => {
     })
   };
 
+  const goToFavorites = () => {
+    navigate('/favorites')
+  }
+
   return (
     <nav className="h-28 flex justify-between items-center container mx-auto">
         <div className="flex-1">
-          <Link to={'/favorites'}>
-        <button className="favorites-btn bg-red-500 py-2 px-2 rounded-md text-white text-xl" >Favorites</button>
-        </Link>
+        <button className="favorites-btn bg-red-500 py-2 px-2 rounded-md text-white text-xl" onClick={goToFavorites}>Favorites</button>
         </div>
 
         <Link to={'/'}>

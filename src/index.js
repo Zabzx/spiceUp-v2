@@ -10,12 +10,14 @@ import { SearchedForContextProvider } from './context/SearchedFor';
 import { RandomContextProvider } from './context/RandomContex';
 import SearchError from './Pages/Search-Error/SearchError';
 import Favorites from './Pages/Favorites/Favorites';
+import { FavoriteContextProvider } from './context/FavoritesContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ResultContextProvider>
     <SearchedForContextProvider>
     <RandomContextProvider>
+    <FavoriteContextProvider>
     <BrowserRouter>
     <Routes>
     <Route path='/' element={<App />}/>
@@ -25,6 +27,7 @@ root.render(
     <Route path='/favorites' element={<Favorites/>}/>
     </Routes>
     </BrowserRouter>
+    </FavoriteContextProvider>
     </RandomContextProvider>
     </SearchedForContextProvider>
     </ResultContextProvider>

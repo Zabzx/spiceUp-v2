@@ -1,25 +1,46 @@
 import { parse } from 'postcss'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { ImCross } from 'react-icons/im'
+import { FavoritesContext } from '../../context/FavoritesContext'
 
 const Modal = ({selectedDish, state, closeModal}) => {
 
+  // Context
+  const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
+
   // State
   const [favoriteDishes, setFavoriteDishes] = useState([]);
+  const [readyForStorage, setReadyForStorage] = useState(false)
 
   // Functions
 
   useEffect(() => {
-    if (localStorage.getItem('favoriteDishes') === null) {
-      localStorage.setItem('favoriteDishes', favoriteDishes)
-      console.log(favoriteDishes)
-    } else if (localStorage.getItem('favoriteDishes') === '') {
+    setFavoriteDishes(favoritesContext)
+  }, [])
+
+  useEffect(() => {
+    // if (localStorage.getItem('favoriteDishes') === null) {
+    //   localStorage.setItem('favoriteDishes', favoriteDishes)
+    // } else if (localStorage.getItem('favoriteDishes') === '') {
+    //   localStorage.setItem('favoriteDishes', JSON.stringify(favoriteDishes))
+    //   console.log(favoriteDishes)
+    //   console.log(localStorage)
+    // } else {
+    //   let parsedStorage = JSON.parse(localStorage.getItem('favoriteDishes'))
+    //   console.log(parsedStorage)
+    // }
+
+    if (!readyForStorage) {
+      return
+    } else {
+      setFavoritesContext(favoriteDishes)
       localStorage.setItem('favoriteDishes', JSON.stringify(favoriteDishes))
-      console.log(localStorage)
     }
+    
   }, [favoriteDishes])
 
   const addToFavorites = (dish) => {
+    setReadyForStorage(true)
     setFavoriteDishes([dish, ...favoriteDishes])
   }
 
