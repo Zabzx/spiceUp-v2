@@ -9,45 +9,22 @@ const Modal = ({selectedDish, state, closeModal}) => {
   const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
 
   // State
-  const [favoriteDishes, setFavoriteDishes] = useState([]);
-  const [readyForStorage, setReadyForStorage] = useState(false)
 
   // Functions
 
   useEffect(() => {
-    if (favoritesContext === undefined) {
-      return 
-    } else {
-      setFavoriteDishes(favoritesContext)
-    }
+    console.log(favoritesContext)
   }, [])
 
   useEffect(() => {
-    // if (localStorage.getItem('favoriteDishes') === null) {
-    //   localStorage.setItem('favoriteDishes', favoriteDishes)
-    // } else if (localStorage.getItem('favoriteDishes') === '') {
-    //   localStorage.setItem('favoriteDishes', JSON.stringify(favoriteDishes))
-    //   console.log(favoriteDishes)
-    //   console.log(localStorage)
-    // } else {
-    //   let parsedStorage = JSON.parse(localStorage.getItem('favoriteDishes'))
-    //   console.log(parsedStorage)
-    // }
-
-    if (!readyForStorage) {
-      return
-    } else {
-      setFavoritesContext(favoriteDishes)
-      localStorage.setItem('favoriteDishes', JSON.stringify(favoriteDishes))
-    }
-    
-  }, [favoriteDishes])
+      localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
+  }, [favoritesContext])
 
   const addToFavorites = (dish) => {
-    setReadyForStorage(true)
     // Making sure the user cannot add the same dish to favorites
     if (!dish.isFav) {
-    setFavoriteDishes([dish, ...favoriteDishes])
+    setFavoritesContext([dish, ...favoritesContext])
+    localStorage.setItem('favoriteDishes0', favoritesContext)
     dish.isFav = true;
     }
   }
