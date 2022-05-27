@@ -16,6 +16,7 @@ const Modal = ({selectedDish, state, closeModal}) => {
 
   useEffect(() => {
     if (favoritesContext === undefined) {
+      setFavoriteDishes(JSON.parse(localStorage.getItem('favoriteDishes')))
       return 
     } else {
       setFavoriteDishes(favoritesContext)
