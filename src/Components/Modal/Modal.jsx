@@ -16,7 +16,6 @@ const Modal = ({selectedDish, state, closeModal}) => {
 
   useEffect(() => {
     if (favoritesContext === undefined) {
-      setFavoriteDishes(JSON.parse(localStorage.getItem('favoriteDishes')))
       return 
     } else {
       setFavoriteDishes(favoritesContext)
@@ -46,7 +45,11 @@ const Modal = ({selectedDish, state, closeModal}) => {
 
   const addToFavorites = (dish) => {
     setReadyForStorage(true)
+    // Making sure the user cannot add the same dish to favorites
+    if (!dish.isFav) {
     setFavoriteDishes([dish, ...favoriteDishes])
+    dish.isFav = true;
+    }
   }
 
   return (
