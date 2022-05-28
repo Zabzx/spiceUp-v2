@@ -9,26 +9,19 @@ const Modal = ({selectedDish, state, closeModal}) => {
   const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
 
   // State
+  const [existingStorage, setExistingStorage] = useState([]);
+  const [readyForStorage, setReadyForStorage] = useState(false)
 
   // Functions
 
   useEffect(() => {
-    console.log(favoritesContext)
-  }, [])
-
-  useEffect(() => {
-      localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
+    localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
   }, [favoritesContext])
 
   const addToFavorites = (dish) => {
-    // Making sure the user cannot add the same dish to favorites
-    if (!dish.isFav) {
     setFavoritesContext([dish, ...favoritesContext])
-    localStorage.setItem('favoriteDishes0', favoritesContext)
-    dish.isFav = true;
-    }
+    setReadyForStorage(true);
   }
-
   return (
 
     <div className={ state ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
