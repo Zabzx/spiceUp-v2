@@ -1,6 +1,7 @@
 import { parse } from 'postcss'
 import React, { useEffect, useContext, useState } from 'react'
 import { ImCross } from 'react-icons/im'
+import { AiOutlineCheck } from 'react-icons/ai'
 import { FavoritesContext } from '../../context/FavoritesContext'
 
 const Modal = ({selectedDish, state, closeModal}) => {
@@ -9,20 +10,52 @@ const Modal = ({selectedDish, state, closeModal}) => {
   const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
 
   // State
-  const [existingStorage, setExistingStorage] = useState([]);
-  const [readyForStorage, setReadyForStorage] = useState(false)
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
+  const [dishAlreadyAdded, setDishAlreadyAdded] = useState(false);
 
   // Functions
 
   useEffect(() => {
     localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
-  }, [favoritesContext])
+  }, [favoritesContext]);
 
   const addToFavorites = (dish) => {
-    setFavoritesContext([dish, ...favoritesContext])
-    setReadyForStorage(true);
+    if (favoritesContext.includes(dish)) {
+      setDishAlreadyAdded(true);
+      return
+    }
+    setFavoritesContext([dish, ...favoritesContext]);
+    setAddedToFavorites(true)
   }
+
+    // Dish already added alert
+    useEffect(() => {
+      setTimeout(() => {
+        setDishAlreadyAdded(false);
+      }, 3000)
+    }, [dishAlreadyAdded])
+
+    // Add to favorites alert
+    useEffect(() => {
+      setTimeout(() => {
+        setAddedToFavorites(false);
+      }, 5000)
+    }, [addToFavorites]);
+
   return (
+    <>
+    {/* Added to favorites alert */}
+    { addedToFavorites ? <div className="absolute inset-x-1/2 -translate-x-1/2 border-2 border-red-500 rounded-lg flex justify-around items-center w-96 h-40 text-3xl bg-white z-20">
+      <h1>Added to favorites</h1>
+      <AiOutlineCheck className="text-green-500"/>
+    </div> : ''}
+
+
+    {/* Dish already added alert */}
+    { dishAlreadyAdded ? <div className="absolute inset-x-1/2 -translate-x-1/2 border-2 border-red-500 rounded-lg flex justify-around items-center w-96 h-40 text-3xl bg-white z-20">
+      <h1>Dish already added</h1>
+      <ImCross className="text-red-500"/>
+    </div> : ''}
 
     <div className={ state ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
         <div className="flex justify-between container h-20 items-center">
@@ -63,6 +96,7 @@ const Modal = ({selectedDish, state, closeModal}) => {
         </div>
         </div>
     </div>
+    </>
   )
 }
 
