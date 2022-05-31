@@ -16,7 +16,13 @@ const Modal = ({selectedDish, state, closeModal, favPage}) => {
   // Functions
 
   useEffect(() => {
-    localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
+    let oldStorage = JSON.parse(localStorage.getItem('favoriteDishes'));
+    if (favoritesContext.length === 0) {
+      localStorage.setItem('favoriteDishes', JSON.stringify(oldStorage))
+      console.log(JSON.parse(localStorage.getItem('favoriteDishes')))
+    } else {
+      localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
+    }
   }, [favoritesContext]);
 
   const addToFavorites = (dish) => {

@@ -11,6 +11,8 @@ const Results = () => {
     const [dishSelected, setDishSelected] = useState(false)
     const [selectedDish, setSelectedDish] = useState();
 
+    const [favpage, setFavpage] = useState(true);
+
     // Context
     const [results, setResults] = useContext(ResultContext);
     const [searchedFor, setSearchedFor] = useContext(SearchedForContext);
@@ -40,7 +42,7 @@ const Results = () => {
     <>
     <Header/>
     {/* Modal */}
-    { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal}/> : ''}
+    { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
     {/* Grid */}
 
     <h1 className="text-3xl text-center pt-5 font-dancing-script">Results for {searchedFor}</h1>
