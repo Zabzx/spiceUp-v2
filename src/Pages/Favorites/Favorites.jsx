@@ -13,12 +13,10 @@ const Favorites = () => {
     const [dishSelected, setDishSelected] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
 
+    const [favpage, setFavpage] = useState(false);
+
         // Functions
     // Initially chosing a dish to be displayed when a user hovers over a result item.
-
-    useEffect(() => {
-        console.log(localStorage.getItem('favoriteDishes'))
-    }, [])
     const chooseDish = (dish) => {
         if (dishSelected) {
             return
@@ -42,7 +40,7 @@ const Favorites = () => {
   return (
     <>
     <Header/>
-    { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal}/> : ''}
+    { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
    { localStorage.getItem('favoriteDishes') !== null ? <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
         {JSON.parse(localStorage.getItem('favoriteDishes')).map((dish) => (
             <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>

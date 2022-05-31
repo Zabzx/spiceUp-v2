@@ -11,6 +11,8 @@ const Random = () => {
     const [dishSelected, setDishSelected] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
 
+    const [favpage, setFavpage] = useState(true);
+
   // Context
   const [randomDish, setRandomDish] = useContext(RandomContext);
 
@@ -49,7 +51,7 @@ const Random = () => {
       <Header/>
 
           {/* Modal */}
-      { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal}/> : ''}
+      { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
       <div className="bg-red-500 w-1/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={randomDish.strMealThumb} alt="" />
