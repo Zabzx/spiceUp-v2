@@ -4,7 +4,7 @@ import { ImCross } from 'react-icons/im'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { FavoritesContext } from '../../context/FavoritesContext'
 
-const Modal = ({selectedDish, state, closeModal, favPage}) => {
+const Modal = ({selectedDish, state, closeModal}) => {
 
   // Context
   const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
@@ -16,13 +16,16 @@ const Modal = ({selectedDish, state, closeModal, favPage}) => {
   // Functions
 
   useEffect(() => {
-    let oldStorage = JSON.parse(localStorage.getItem('favoriteDishes'));
+    let exisitngStorage = JSON.parse(localStorage.getItem('favoriteDishes'))
+    console.log(exisitngStorage)
+
     if (favoritesContext.length === 0) {
-      localStorage.setItem('favoriteDishes', JSON.stringify(oldStorage))
-      console.log(JSON.parse(localStorage.getItem('favoriteDishes')))
-    } else {
-      localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
+      setFavoritesContext(exisitngStorage)
     }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('favoriteDishes', JSON.stringify(favoritesContext))
   }, [favoritesContext]);
 
   const addToFavorites = (dish) => {
@@ -71,8 +74,7 @@ const Modal = ({selectedDish, state, closeModal, favPage}) => {
         <div className="container h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
 
-        {/* Add to favorites button depending */}
-        { favPage ? <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => addToFavorites(selectedDish)}>Add to Favorites</button> : ""}
+        <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => addToFavorites(selectedDish)}>Add to Favorites</button>
         <h1 className="text-3xl text-red-500 py-10">Instructions:</h1>
         <p className="pt-4">{selectedDish.strInstructions}</p>
 
