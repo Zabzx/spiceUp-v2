@@ -16,11 +16,14 @@ const Modal = ({selectedDish, state, closeModal}) => {
   // Functions
 
   useEffect(() => {
-    let exisitngStorage = JSON.parse(localStorage.getItem('favoriteDishes'))
-    console.log(exisitngStorage)
+    let existingStorage = JSON.parse(localStorage.getItem('favoriteDishes'));
+
+    if (localStorage.getItem('favoriteDishes') === null) {
+      return
+    }
 
     if (favoritesContext.length === 0) {
-      setFavoritesContext(exisitngStorage)
+      setFavoritesContext(existingStorage)
     }
   }, [])
 
