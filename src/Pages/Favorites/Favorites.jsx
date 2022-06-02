@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header/Header.jsx';
 import Modal from '../../Components/Modal/Modal.jsx';
+import {  useNavigate } from 'react-router-dom';
 
 const Favorites = () => {
+
+    let navigate = useNavigate
 
     // State
     const [mountModal, setMountModal] = useState(false);
     const [dishSelected, setDishSelected] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
     const [favpage, setFavpage] = useState(false);
+    const [storageCleared, setStorageCleared] = useState(false);
 
     // Functions
+
+    useEffect(() => {
+        setStorageCleared(false)
+    }, [setStorageCleared])
     // Initially chosing a dish to be displayed when a user hovers over a result item.
     const chooseDish = (dish) => {
         if (dishSelected) {
@@ -34,7 +42,7 @@ const Favorites = () => {
     // Clear favorites
     const clearFavorites = () => {
         localStorage.clear();
-        document.location.reload();
+        setStorageCleared(true)
     }
 
   return (
