@@ -49,7 +49,7 @@ const Favorites = () => {
     <>
     <Header/>
     { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
-    { localStorage.getItem('favoriteDishes') !== null ? <div className='text-center'> <button className='p-4 bg-red-500 rounded-lg text-white' onClick={clearFavorites}>Clear Favorites</button> <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
+    { localStorage.getItem('favoriteDishes') !== null ? <div className='text-center'> <button className='p-4 bg-red-500 rounded-lg text-white' onClick={clearFavorites}>Clear Favorites</button> <div className="pt-20 grid sm:grid-cols-3 gap-y-10 items-center w-full">
         {JSON.parse(localStorage.getItem('favoriteDishes')).map((dish) => (
             <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">

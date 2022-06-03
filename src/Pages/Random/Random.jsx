@@ -52,7 +52,7 @@ const Random = () => {
 
           {/* Modal */}
       { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
-      <div className="bg-red-500 w-1/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
+      <div className="bg-red-500 sm:w-1/4 w-3/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={randomDish.strMealThumb} alt="" />
                 </div>
@@ -65,7 +65,7 @@ const Random = () => {
                 </div>
             </div>
 
-            <button className="try-again-btn absolute right-52 bg-red-500 p-3 rounded-lg text-white" onClick={getRandomDish}>Try Again</button>
+            <button className="try-again-btn absolute sm:right-52 right-1/2 my-3 -translate-x-1/2 bg-red-500 p-3 rounded-lg text-white" onClick={getRandomDish}>Try Again</button>
     </>
   )
 }

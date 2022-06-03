@@ -57,24 +57,24 @@ const Modal = ({selectedDish, state, closeModal}) => {
   return (
     <>
     {/* Added to favorites alert */}
-    { addedToFavorites ? <div className="absolute inset-x-1/2 -translate-x-1/2 border-2 border-red-500 rounded-lg flex justify-around items-center w-96 h-40 text-3xl bg-white z-20">
+    { addedToFavorites ? <div className="absolute inset-x-1/2 -translate-x-1/2 border-2 border-red-500 rounded-lg flex justify-around items-center w-80 h-40 text-3xl bg-white z-20">
       <h1>Added to favorites</h1>
       <AiOutlineCheck className="text-green-500"/>
     </div> : ''}
 
 
     {/* Dish already added alert */}
-    { dishAlreadyAdded ? <div className="absolute inset-x-1/2 -translate-x-1/2 border-2 border-red-500 rounded-lg flex justify-around items-center w-96 h-40 text-3xl bg-white z-20">
+    { dishAlreadyAdded ? <div className="absolute inset-x-1/2 -translate-x-1/2 border-2 border-red-500 rounded-lg flex justify-around items-center w-80 h-40 text-3xl bg-white z-20">
       <h1>Dish already added</h1>
       <ImCross className="text-red-500"/>
     </div> : ''}
 
-    <div className={ state ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear duration-300 scale-1" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
-        <div className="flex justify-between container h-20 items-center">
-        <h1 className="flex-1 text-3xl text-red-500">{selectedDish.strMeal}</h1>
+    <div className={ state ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear duration-300 scale-1 z-10" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
+        <div className="flex justify-between sm:container mx-2 h-20 items-center">
+        <h1 className="flex-1 sm:text-3xl text-xl text-red-500">{selectedDish.strMeal}</h1>
         <ImCross className="cursor-pointer p-1 text-3xl" onClick={closeModal}/>
         </div>
-        <div className="container h-full">
+        <div className="sm:container mx-2 h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
 
         <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => addToFavorites(selectedDish)}>Add to Favorites</button>
@@ -82,7 +82,7 @@ const Modal = ({selectedDish, state, closeModal}) => {
         <p className="pt-4">{selectedDish.strInstructions}</p>
 
         {/* Ingredients */}
-        <h1 className="text-red-500 text-3xl mt-20 mb-10">Ingredients:</h1>
+        <h1 className="text-red-500 text-3xl mt-20">Ingredients:</h1>
         <ul className="list-disc">
         <li>{selectedDish.strIngredient1 + " " + selectedDish.strMeasure1}</li>
         <li>{selectedDish.strIngredient2 + " " + selectedDish.strMeasure2}</li>
@@ -102,7 +102,7 @@ const Modal = ({selectedDish, state, closeModal}) => {
         <li>{selectedDish.strIngredient16 + " " + selectedDish.strMeasure16}</li>
         </ul>
 
-        <div className="my-10">
+        <div className="sm:my-10">
         <h1 className="text-3xl text-red-500">YouTube Link</h1>
         <a href={selectedDish.strYoutube} target="_blank"><p className='text-red-500 pb-10'>{selectedDish.strYoutube}</p></a>
         </div>

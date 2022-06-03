@@ -47,7 +47,7 @@ const Results = () => {
 
     <h1 className="text-3xl text-center pt-5 font-dancing-script">Results for {searchedFor}</h1>
 
-    <div className="pt-20 grid grid-cols-3 gap-y-10 items-center w-full">
+    <div className="pt-20 grid sm:grid-cols-3 gap-y-10 items-center w-full">
         {results.map((dish) => (
             <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">
