@@ -4,7 +4,7 @@ import { ImCross } from 'react-icons/im'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { FavoritesContext } from '../../context/FavoritesContext'
 
-const Modal = ({selectedDish, state, closeModal}) => {
+const Modal = ({selectedDish, state, closeModal, favPage}) => {
 
   // Context
   const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
@@ -77,7 +77,7 @@ const Modal = ({selectedDish, state, closeModal}) => {
         <div className="sm:container mx-2 h-full">
         <img src={selectedDish.strMealThumb} className="h-1/2 rounded-lg"/>
 
-        <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => addToFavorites(selectedDish)}>Add to Favorites</button>
+        { favPage ? <button className="p-4 bg-red-500 text-white rounded-lg mt-5" onClick={() => addToFavorites(selectedDish)}>Add to Favorites</button> : ''}
         <h1 className="text-3xl text-red-500 py-10">Instructions:</h1>
         <p className="pt-4">{selectedDish.strInstructions}</p>
 
