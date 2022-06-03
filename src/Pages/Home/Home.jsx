@@ -9,6 +9,8 @@ const Home = () => {
   // Context
   const [randomDish, setRandomDish] = useContext(RandomContext);
 
+  // Functions
+  // Random dish
   async function getRandomDish() {
     await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
     .then(res => res.json())

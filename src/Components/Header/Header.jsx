@@ -42,13 +42,13 @@ const Header = () => {
   }
 
   return (
-    <nav className="h-28 flex justify-between items-center container mx-auto">
+    <nav className="h-28 flex justify-between items-center xl:container mx-auto">
         <div className="flex-1">
-        <button className="favorites-btn bg-red-500 py-2 px-2 rounded-md text-white text-xl" onClick={goToFavorites}>Favorites</button>
+        <button className="favorites-btn bg-green-500 text-sm p-1 sm:bg-red-500 sm:py-2 sm:px-2 rounded-md text-white text-xl" onClick={goToFavorites}>Favorites</button>
         </div>
 
         <Link to={'/'}>
-        <h1 className="flex justify-center flex-1 text-red-500 text-4xl">spiceUp!</h1>
+        <h1 className="flex justify-center flex-1 text-red-500 text-sm sm:text-4xl">spiceUp!</h1>
         </Link>
 
         <form className="flex flex-1 justify-end" onSubmit={(e) => dishSearch(e)}>
