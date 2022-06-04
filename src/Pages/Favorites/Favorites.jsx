@@ -12,13 +12,9 @@ const Favorites = () => {
     const [dishSelected, setDishSelected] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
     const [favpage, setFavpage] = useState(false);
-    const [storageCleared, setStorageCleared] = useState(false);
 
     // Functions
 
-    useEffect(() => {
-        setStorageCleared(false)
-    }, [setStorageCleared])
     // Initially chosing a dish to be displayed when a user hovers over a result item.
     const chooseDish = (dish) => {
         if (dishSelected) {
@@ -42,7 +38,7 @@ const Favorites = () => {
     // Clear favorites
     const clearFavorites = () => {
         localStorage.clear();
-        setStorageCleared(true)
+        document.location.reload();
     }
 
   return (
