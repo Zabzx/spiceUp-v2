@@ -51,7 +51,7 @@ const Results = () => {
         {results.map((dish) => (
             <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
                 <div className="dish-img">
-                <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
+                <img loading='lazy' className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>
 
                 <div className="dish-info">

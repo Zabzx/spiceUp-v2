@@ -42,17 +42,17 @@ const Header = () => {
   }
 
   return (
-    <nav className="sm:h-28 h-14 flex justify-between items-center sm:container sm:mx-auto">
+    <nav className="sm:h-28 h-16 flex justify-between items-center sm:container sm:mx-auto">
         <div className="sm:flex-1">
-        <button className="favorites-btn sm:text-xl p-1 bg-red-500 sm:py-2 sm:px-2 rounded-md text-white text-sm" onClick={goToFavorites}>Favorites</button>
+        <button className="favorites-btn sm:text-xl p-1 ml-3 bg-red-500 sm:py-2 sm:px-2 rounded-md text-white text-sm" onClick={goToFavorites}>Favorites</button>
         </div>
 
         <Link to={'/'}>
-        <h1 className="flex justify-center flex-1 text-red-500 text-lg sm:text-4xl">spiceUp!</h1>
+        <h1 className="sm:flex justify-center flex-1 text-red-500 text-lg sm:text-4xl hidden">spiceUp!</h1>
         </Link>
 
         <form className="flex sm:flex-1 justify-end" onSubmit={(e) => dishSearch(e)}>
-        <input placeholder='Search for a meal' type="text" className="sm:w-3/5 sm:h-10 h-5 w-full p-1 border-2 rounded-xl border-gray-400 focus:outline-none" onChange={(e) => setUserSearchValue(e.target.value)} />
+        <input placeholder='Search for a meal' type="text" className="sm:w-3/5 sm:h-10 h-5 w-full p-1 border-2 rounded-xl mr-3 border-gray-400 focus:outline-none" onChange={(e) => setUserSearchValue(e.target.value)} />
         </form>
     </nav>
   )
