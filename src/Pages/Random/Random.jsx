@@ -37,12 +37,12 @@ const Random = () => {
     }
 
   return (
-    <>
+    <div className="randoms-page overflow-hidden h-full">
       <Header/>
       <AnimatePresence>
       { showModal ? <Modal selectedDish={randomDish} favPage={favpage} closeModal={closeModal}/> : ''}
       </AnimatePresence>
-      <div className="bg-red-500 sm:w-1/4 w-3/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()}>
+      <div className="bg-red-500 sm:w-1/4 w-3/4 mx-auto rounded-lg mt-5 cursor-pointer overflow-hidden" key={randomDish.idMeal} onClick={() => openModal()}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={randomDish.strMealThumb} alt="" />
                 </div>
@@ -56,7 +56,7 @@ const Random = () => {
             </div>
 
             <button className="try-again-btn absolute sm:right-52 right-1/2 my-3 -translate-x-1/2 bg-red-500 p-3 rounded-lg text-white" onClick={getRandomDish}>Try Again</button>
-    </>
+    </div>
   )
 }
 

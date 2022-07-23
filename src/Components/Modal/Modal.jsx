@@ -69,8 +69,8 @@ const Modal = ({selectedDish, closeModal, favPage}) => {
       <ImCross className="text-red-500"/>
     </div> : ''}
 
-    <div className="modal-container absolute flex w-full h-full justify-center">
-    <motion.div className="w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear z-10" animate={{ opacity: 1, x: 0}} initial={{opacity: 0, x: 20}}>
+    <div className="modal-container absolute flex w-full h-90 justify-center overflow-hidden">
+    <motion.div className="relative w-5/6 h-5/6 bg-white overflow-y-scroll overflow-x-hidden rounded-2xl shadow-2xl z-10" animate={{ opacity: 1, x: 0}} initial={{opacity: 0, x: 200}} exit={{ scale: .8, opacity: 0}}>
         <div className="flex justify-between sm:container mx-2 h-20 items-center">
         <h1 className="flex-1 sm:text-3xl text-xl text-red-500">{selectedDish.strMeal}</h1>
         <ImCross className="cursor-pointer p-1 text-3xl" onClick={closeModal}/>
