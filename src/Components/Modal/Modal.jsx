@@ -1,10 +1,10 @@
-import { parse } from 'postcss'
 import React, { useEffect, useContext, useState } from 'react'
 import { ImCross } from 'react-icons/im'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { FavoritesContext } from '../../context/FavoritesContext'
+import { motion } from 'framer-motion';
 
-const Modal = ({selectedDish, state, closeModal, favPage}) => {
+const Modal = ({selectedDish, closeModal, favPage}) => {
 
   // Context
   const [favoritesContext, setFavoritesContext] = useContext(FavoritesContext);
@@ -69,7 +69,8 @@ const Modal = ({selectedDish, state, closeModal, favPage}) => {
       <ImCross className="text-red-500"/>
     </div> : ''}
 
-    <div className={ state ? "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear duration-300 scale-1 z-10" : "fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 w-5/6 h-5/6 bg-white ease-linear duration-300 scale-0" }>
+    <div className="modal-container absolute flex w-full h-full justify-center">
+    <motion.div className="w-5/6 h-5/6 bg-white border border-black overflow-scroll ease-linear z-10" animate={{ opacity: 1, x: 0}} initial={{opacity: 0, x: 20}}>
         <div className="flex justify-between sm:container mx-2 h-20 items-center">
         <h1 className="flex-1 sm:text-3xl text-xl text-red-500">{selectedDish.strMeal}</h1>
         <ImCross className="cursor-pointer p-1 text-3xl" onClick={closeModal}/>
@@ -107,6 +108,7 @@ const Modal = ({selectedDish, state, closeModal, favPage}) => {
         <a href={selectedDish.strYoutube} target="_blank"><p className='text-red-500 pb-10'>{selectedDish.strYoutube}</p></a>
         </div>
         </div>
+    </motion.div>
     </div>
     </>
   )

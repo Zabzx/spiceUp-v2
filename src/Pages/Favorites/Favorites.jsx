@@ -2,38 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header/Header.jsx';
 import Modal from '../../Components/Modal/Modal.jsx';
 import {  useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 const Favorites = () => {
 
     let navigate = useNavigate
 
     // State
-    const [mountModal, setMountModal] = useState(false);
-    const [dishSelected, setDishSelected] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
     const [favpage, setFavpage] = useState(false);
 
     // Functions
-
-    // Initially chosing a dish to be displayed when a user hovers over a result item.
-    const chooseDish = (dish) => {
-        if (dishSelected) {
-            return
-        } else {
-            setSelectedDish(dish);
-            setMountModal(true)
-        }
-    }
-
-    // Opens the modal
-    const openModal = () => {
-        setDishSelected(true)
-    }
-
-     // Closes the modal
-     const closeModal = () => {
-        setDishSelected(false);
-    }
 
     // Clear favorites
     const clearFavorites = () => {
@@ -41,17 +21,28 @@ const Favorites = () => {
         document.location.reload();
     }
 
+    // Open modal
+    const openModal = () => {
+        setShowModal(true);
+    }
+
+    const closeModal = () => {
+        setShowModal(false);
+    }
+
   return (
     <>
     <Header/>
-    { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
+    <AnimatePresence>
+    { showModal ? <Modal selectedDish={selectedDish} favPage={favpage}/> : ''}
+    </AnimatePresence>
+    
     { localStorage.getItem('favoriteDishes') !== null ? <div className='text-center'> <button className='p-4 bg-red-500 rounded-lg text-white' onClick={clearFavorites}>Clear Favorites</button> <div className="pt-20 grid sm:grid-cols-3 gap-y-10 items-center w-full">
         {JSON.parse(localStorage.getItem('favoriteDishes')).map((dish) => (
-            <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
+            <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>
-
                 <div className="dish-info">
                 <h1 className='text-white text-center text-4xl pt-3 font-dancing-script'>{dish.strMeal}</h1>
                 <p className="px-6 mt-5 text-white text-lg">Region: {dish.strArea}</p>

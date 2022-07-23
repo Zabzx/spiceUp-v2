@@ -3,11 +3,12 @@ import Header from '../../Components/Header/Header';
 import { ResultContext } from '../../context/ResultContext';
 import { SearchedForContext } from '../../context/SearchedFor';
 import Modal from '../../Components/Modal/Modal';
+import { AnimatePresence } from 'framer-motion';
 
 const Results = () => {
 
     // State
-    const [mountModal, setMountModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [dishSelected, setDishSelected] = useState(false)
     const [selectedDish, setSelectedDish] = useState();
 
@@ -18,38 +19,30 @@ const Results = () => {
     const [searchedFor, setSearchedFor] = useContext(SearchedForContext);
 
     // Functions
-    // Initially chosing a dish to be displayed when a user hovers over a result item.
-    const chooseDish = (dish) => {
-        if (dishSelected) {
-            return
-        } else {
-            setSelectedDish(dish);
-            setMountModal(true)
-        }
-    }
 
-    // Opens the modal
+    // Opens modal
     const openModal = () => {
-        setDishSelected(true)
+        setShowModal(true)
     }
 
-    // Closes the modal
+    // Closes modal
     const closeModal = () => {
-        setDishSelected(false);
+        setShowModal(false);
     }
 
   return (
     <>
     <Header/>
-    {/* Modal */}
-    { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
-    {/* Grid */}
+    <AnimatePresence>
+    { showModal ? <Modal selectedDish={selectedDish} favPage={favpage}/> : ''}
+    </AnimatePresence>
 
+    {/* Grid */}
     <h1 className="text-3xl text-center pt-5 font-dancing-script">Results for {searchedFor}</h1>
 
     <div className="pt-20 grid sm:grid-cols-3 gap-y-10 items-center w-full">
         {results.map((dish) => (
-            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)} onMouseEnter={() => chooseDish(dish)}>
+            <div className="flex flex-col bg-red-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)}>
                 <div className="dish-img">
                 <img loading='lazy' className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>

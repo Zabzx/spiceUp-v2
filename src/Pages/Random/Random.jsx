@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react'
 import Header from '../../Components/Header/Header'
 import { RandomContext } from '../../context/RandomContex';
-import { ImCross } from 'react-icons/im'
 import Modal from '../../Components/Modal/Modal';
+import { AnimatePresence } from 'framer-motion';
 
 const Random = () => {
 
     // State
-    const [mountModal, setMountModal] = useState(false);
-    const [dishSelected, setDishSelected] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [selectedDish, setSelectedDish] = useState();
 
     const [favpage, setFavpage] = useState(true);
@@ -17,25 +16,6 @@ const Random = () => {
   const [randomDish, setRandomDish] = useContext(RandomContext);
 
   // Functions
-      // Initially chosing a dish to be displayed when a user hovers over a result item.
-      const chooseDish = () => {
-        if (dishSelected) {
-            return
-        } else {
-            setSelectedDish(randomDish);
-            setMountModal(true)
-        }
-    }
-
-    // Opens the modal
-    const openModal = () => {
-        setDishSelected(true)
-    }
-
-    // Closes the modal
-    const closeModal = () => {
-        setDishSelected(false);
-    }
 
     // New random dish
     async function getRandomDish() {
@@ -46,13 +26,23 @@ const Random = () => {
       })
     }
 
+    // Open modal
+    const openModal = () => {
+      setShowModal(true);
+    }
+
+    // Close modal
+    const closeModal = () => {
+      setShowModal(false);
+    }
+
   return (
     <>
       <Header/>
-
-          {/* Modal */}
-      { mountModal ? <Modal state={dishSelected} selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
-      <div className="bg-red-500 sm:w-1/4 w-3/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()} onMouseEnter={() => chooseDish(randomDish)}>
+      <AnimatePresence>
+      { showModal ? <Modal selectedDish={randomDish} favPage={favpage} closeModal={closeModal}/> : ''}
+      </AnimatePresence>
+      <div className="bg-red-500 sm:w-1/4 w-3/4 mx-auto rounded-lg mt-5 cursor-pointer" key={randomDish.idMeal} onClick={() => openModal()}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={randomDish.strMealThumb} alt="" />
                 </div>
