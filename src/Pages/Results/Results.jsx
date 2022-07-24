@@ -21,7 +21,8 @@ const Results = () => {
     // Functions
 
     // Opens modal
-    const openModal = () => {
+    const openModal = (dish) => {
+        setSelectedDish(dish);
         setShowModal(true)
     }
 
@@ -34,7 +35,7 @@ const Results = () => {
     <>
     <Header/>
     <AnimatePresence>
-    { showModal ? <Modal selectedDish={selectedDish} favPage={favpage}/> : ''}
+    { showModal ? <Modal selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
     </AnimatePresence>
 
     {/* Grid */}

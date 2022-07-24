@@ -22,7 +22,8 @@ const Favorites = () => {
     }
 
     // Open modal
-    const openModal = () => {
+    const openModal = (dish) => {
+        setSelectedDish(dish);
         setShowModal(true);
     }
 
@@ -34,12 +35,12 @@ const Favorites = () => {
     <>
     <Header/>
     <AnimatePresence>
-    { showModal ? <Modal selectedDish={selectedDish} favPage={favpage}/> : ''}
+    { showModal ? <Modal selectedDish={selectedDish} closeModal={closeModal} favPage={favpage}/> : ''}
     </AnimatePresence>
     
     { localStorage.getItem('favoriteDishes') !== null ? <div className='text-center'> <button className='p-4 bg-red-500 rounded-lg text-white' onClick={clearFavorites}>Clear Favorites</button> <div className="pt-20 grid sm:grid-cols-3 gap-y-10 items-center w-full">
         {JSON.parse(localStorage.getItem('favoriteDishes')).map((dish) => (
-            <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal}>
+            <div className="flex flex-col bg-green-500 w-3/5 rounded-2xl justify-self-center cursor-pointer" key={dish.idMeal} onClick={() => openModal(dish)}>
                 <div className="dish-img">
                 <img className="w-full object-cover rounded-t-lg" src={dish.strMealThumb} alt="" />
                 </div>
